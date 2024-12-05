@@ -51,29 +51,28 @@ const OrderTracking = () => {
     const currentStep = steps.indexOf(orderStatus.charAt(0).toUpperCase() + orderStatus.slice(1))
 
     return(
-        <Card >
+        <Card sx={{maxWidth: 600, margin: 'auto', mt: 2, mb: 3}} raised={true} >
             <CardContent>
-                <Box>
-                    <Typography>Oder Tracking</Typography>
+                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', mb: 2}}>
+                    <Typography variant="h6">Order Tracking</Typography>
                     <Typography>Order #ORDER111</Typography>
                 </Box>
                 {webSocketStatus !== 'connected' && (
-                    <Alert severity="error">Connection Lost. Attempting to reconnect...</Alert>
+                    <Alert severity="error" sx={{ mb: 2 }}>Connection Lost. Attempting to reconnect...</Alert>
                 )}
                 <Box
                     sx={{ 
                         p: 2, 
                         mb: 3, 
                         borderRadius: 1, 
-                        bgcolor: 'background.default',
-                        border: 1,
+                        bgcolor: '#d8fdd9',
                         borderColor: 'divider'
                     }}
                 >
-                    <Box>
+                    <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
                         {statusIcons(orderStatus)}
                         <Box>
-                            <Typography>{orderStatus}</Typography>
+                            <Typography variant="subtitle1" sx={{textTransform: 'capitalize'}}>Status: {orderStatus}</Typography>
                             {lastestUpdate && (
                                 <Typography>Last updated: {lastestUpdate}
                                 </Typography>
@@ -82,7 +81,7 @@ const OrderTracking = () => {
                     </Box>
                 </Box>
 
-                <Stepper activeStep={currentStep}>
+                <Stepper activeStep={currentStep} orientation="vertical" sx={{ ml:2, mb: 3}}>
                     {steps.map((label) => (
                         <Step key={label}>
                             <StepLabel>{label}</StepLabel>
