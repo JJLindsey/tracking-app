@@ -7,8 +7,29 @@ const OrderTracking = () => {
     const [socket, setSocket] = useState(null)
 
     useEffect(()=> {
-        const ws = new WebSocket('')
-        
-    })
+        const ws = new WebSocket('wss://localhost:8080')
+
+        ws.onopen = () => {
+            setWebSocketStatus('connected')
+            ws.send(JSON.stringify({
+                type: 'subscribe',
+                orderId: 'Order111'
+            }))
+        }
+        ws.onmessage = () => {
+            const data = JSON.parse(event.data)
+            setOrderStatus(data.status)
+            setLatestUpdate(new Date().toLocaleTimeString())
+        }
+        ws.onclose = () => {
+            setWebSocketStatus('disconnected')
+        }
+        setSocket(ws)
+        return () => {
+            if (ws) {
+                ws.close()
+            }
+        }
+    }, [])
 
 }
