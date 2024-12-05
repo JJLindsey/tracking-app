@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/icons-material": "^6.1.10",
+    "@mui/material": "^6.1.10",
+    "next": "14.2.20",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.20"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "eslint": "^8",
