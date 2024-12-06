@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react"
 
 const OrderTracking = () => {
     const [orderStatus, setOrderStatus] = useState('preparing')
-    const [lastestUpdate, setLatestUpdate] = useState('')
+    const [latestUpdate, setLatestUpdate] = useState('')
     const [webSocketStatus, setWebSocketStatus] = useState('connecting')
     const [socket, setSocket] = useState(null)
 
     useEffect(()=> {
-        const ws = new WebSocket('wss://localhost:8080')
+        const ws = new WebSocket('ws://localhost:8080')
 
         ws.onopen = () => {
             setWebSocketStatus('connected')
@@ -18,7 +18,7 @@ const OrderTracking = () => {
                 orderId: 'Order111'
             }))
         }
-        ws.onmessage = () => {
+        ws.onmessage = (event) => {
             const data = JSON.parse(event.data)
             setOrderStatus(data.status)
             setLatestUpdate(new Date().toLocaleTimeString())
@@ -73,8 +73,8 @@ const OrderTracking = () => {
                         {statusIcons(orderStatus)}
                         <Box>
                             <Typography variant="subtitle1" sx={{textTransform: 'capitalize'}}>Status: {orderStatus}</Typography>
-                            {lastestUpdate && (
-                                <Typography>Last updated: {lastestUpdate}
+                            {latestUpdate && (
+                                <Typography>Last updated: {latestUpdate}
                                 </Typography>
                             )}
                         </Box>
