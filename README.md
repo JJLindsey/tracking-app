@@ -14,10 +14,10 @@ This is a real-time order tracking component built using Next.js and MUI. It use
 <img src="public/orderStatus.png" alt="order status screenshot" width="300">
 
 ## Installation
-clone repository
-run npm i to install dependencies
-start Websocket server
-start Client app
+* clone repository
+* run npm i to install dependencies
+* start Websocket server
+* start Client app
 
 ## Environment
 Ensure the Websocket server is running on ws://localhost:8080 or update the URL in the component
